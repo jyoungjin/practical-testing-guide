@@ -95,3 +95,23 @@
     - When : 시나리오 행동 진행
     - Then : 시나리오 진행에 대한 결과 명시, 검증
     - 어떤 환경에서(Given), 어떤 행동을 진행했을 때(When), 어떤 상태 변화가 일어난다(Then).
+
+### Section 5. Spring & JPA 기반 테스트
+- **Keyword**
+- Layered Architecture -> 관심사의 분리
+  - Presentation Layer
+    - 외부 세계의 요청을 가장 먼저 받는 계층
+    - 파라미터에 대한 최소한의 검증을 수행한다.
+  - Business Layer
+    - 비즈니스 로직을 구현하는 역할
+    - Persistence Layer와의 상호작용을 통해 비즈니스 로직을 전개시킨다.
+    - **트랜잭션**을 보장해야 한다.
+  - Persistence Layer
+    - Data Access의 역할
+    - 비즈니스 가공 로직이 포함되어서는 안 된다. (Data에 대한 CRUD에만 집중한 레이어)
+- 통합 테스트
+  - 여러 모듈이 협력하는 기능을 통합적으로 검증하는 테스트
+  - 일반적으로 작은 범위의 단위 테스트만으로는 기능 전체의 신뢰성을 보장할 수 없다.
+  - 풍부한 단위 테스트 & 큰 기능 단위를 검증하는 통합 테스트
+- @SpringBootTest vs @DataJpaTest : 트랜잭션
+- 테스트에서 @Transactional을 조심해서 사용하자!
