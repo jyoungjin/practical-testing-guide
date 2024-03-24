@@ -115,3 +115,4 @@
   - 풍부한 단위 테스트 & 큰 기능 단위를 검증하는 통합 테스트
 - @SpringBootTest vs @DataJpaTest : 트랜잭션
 - 테스트에서 @Transactional을 조심해서 사용하자!
+- Mock(가짜) 객체를 사용해 스프링 MVC 동작을 재현할 수 있는 테스트 프레임워크
