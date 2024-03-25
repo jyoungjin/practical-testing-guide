@@ -49,7 +49,7 @@ class ProductServiceTest {
                 .build();
 
         // when
-        ProductResponse response = productService.createProduct(request);
+        ProductResponse response = productService.createProduct(request.toServiceRequest());
 
         // then
         assertThat(response)
@@ -77,7 +77,7 @@ class ProductServiceTest {
                 .build();
 
         // when
-        ProductResponse response = productService.createProduct(request);
+        ProductResponse response = productService.createProduct(request.toServiceRequest());
 
         // then
         assertThat(response)

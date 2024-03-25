@@ -98,6 +98,23 @@
 
 ### Section 5. Spring & JPA 기반 테스트
 - **Keyword**
+  - `Layered Architecture`
+  - `Hexagonal Architecture`
+  - `단위 테스트 vs 통합 테스트`
+  - `IoC, DI, AOP`
+  - `ORM, 패러다임의 불일치`
+  - `Spring Data JPA`
+  - `QueryDSL - 타입체크, 동적쿼리`
+  - `@SpringBootTest vs @DataJpaTest`
+  - `@SpringBootTest vs @WebMvcTest`
+  - `@Transcational(readOnly = true)`
+  - `Optimistic Lock, Pessimistic Lock`
+  - `CQRS`
+  - `@RestControllerAdvice, @ExceptionHandler`
+  - `Spring bean validation`
+  - `@WebMvcTest`
+  - `ObjectMapper`
+  - `Mock, Mockito, @MockBean`
 - Layered Architecture -> 관심사의 분리
   - Presentation Layer
     - 외부 세계의 요청을 가장 먼저 받는 계층
