@@ -134,6 +134,25 @@
 - 테스트에서 @Transactional을 조심해서 사용하자!
 - Mock(가짜) 객체를 사용해 스프링 MVC 동작을 재현할 수 있는 테스트 프레임워크
 
-### Section 5. Spring & JPA 기반 테스트
+### Section 6. Mock을 마주하는 자세
 - **Keyword**
-- 
+  - `Test Double, Stubbing (dummy, fake, stub, spy, mock`
+  - `@Mock, @MockBean, @Spy, @SpyBean, @InjectMocks`
+  - `BDDMokito`
+  - `Classicist vs Mockist`
+- Test Double
+  - Dummy : 아무 것도 하지 않는 깡통 객체
+  - Fake : 단순한 형태로 동일한 기능은 수행하나, 프로덕션에서 쓰기에는 부족한 객체 (ex. FakeRepository)
+  - Stub : 테스트에서 요청한 것에 대해 미리 준비한 결과를 제공하는 객체, 그 외에는 응답하지 않는다.
+  - Spy : Stub이면서 호출된 내용을 기록하여 보여줄 수 있는 객체, 일부는 실제 객체처럼 동작시키고 일부만 Stubbing 할 수 있다.
+  - Mock : 행위에 대한 기대를 명세하고, 그에 따라 동작하도록 만들어진 객체
+- Stub vs Mock
+  - Stub : 상태 검증 (State Verification)
+  - Mock : 행위 검증 (Behavior Verification)
+- @Mock vs @Spy
+  - 일부는 실제 객체의 기능을 사용하고 싶고, 일부는 Stubbing 하고 싶은 경우 @Spy를 사용한다.
+- Mockito vs BDDMockito
+  - BDD에 맞게 기존 Mockito를 감싼 프레임워크
+
+### Section 7. 더 나은 테스트를 작성하기 위한 구체적 조언
+- **Keyword**
