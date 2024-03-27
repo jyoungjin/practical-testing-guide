@@ -8,9 +8,10 @@ import sample.cafekiosk.spring.IntegrationTestSupport;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 import static sample.cafekiosk.spring.domain.product.ProductSellingStatus.*;
-import static sample.cafekiosk.spring.domain.product.ProductType.*;
+import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
 @Transactional
 class ProductRepositoryTest extends IntegrationTestSupport {
@@ -32,7 +33,7 @@ class ProductRepositoryTest extends IntegrationTestSupport {
 
         // then
         assertThat(products).hasSize(2)
-                .extracting("ProductNumber", "name", "sellingStatus")
+                .extracting("productNumber", "name", "sellingStatus")
                 .containsExactlyInAnyOrder(
                         tuple("001", "아메리카노", SELLING),
                         tuple("002", "카페라떼", HOLD)
@@ -53,14 +54,14 @@ class ProductRepositoryTest extends IntegrationTestSupport {
 
         // then
         assertThat(products).hasSize(2)
-                .extracting("ProductNumber", "name", "sellingStatus")
+                .extracting("productNumber", "name", "sellingStatus")
                 .containsExactlyInAnyOrder(
                         tuple("001", "아메리카노", SELLING),
                         tuple("002", "카페라떼", HOLD)
                 );
     }
 
-    @DisplayName("가장 마지막으로 저장한 상품의 상품 번호를 읽어온다.")
+    @DisplayName("가장 마지막으로 저장한 상품의 상품번호를 읽어온다.")
     @Test
     void findLatestProductNumber() {
         // given
@@ -78,7 +79,7 @@ class ProductRepositoryTest extends IntegrationTestSupport {
         assertThat(latestProductNumber).isEqualTo(targetProductNumber);
     }
 
-    @DisplayName("가장 마지막으로 저장한 상품의 상품 번호를 읽어올 때, 상품이 하나도 없는 경우에는 null을 반환한다.")
+    @DisplayName("가장 마지막으로 저장한 상품의 상품번호를 읽어올 때, 상품이 하나도 없는 경우에는 null을 반환한다.")
     @Test
     void findLatestProductNumberWhenProductIsEmpty() {
         // when
@@ -88,7 +89,7 @@ class ProductRepositoryTest extends IntegrationTestSupport {
         assertThat(latestProductNumber).isNull();
     }
 
-    private static Product createProduct(String productNumber, ProductType type, ProductSellingStatus sellingStatus, String name, int price) {
+    private Product createProduct(String productNumber, ProductType type, ProductSellingStatus sellingStatus, String name, int price) {
         return Product.builder()
                 .productNumber(productNumber)
                 .type(type)
@@ -97,4 +98,5 @@ class ProductRepositoryTest extends IntegrationTestSupport {
                 .price(price)
                 .build();
     }
+
 }

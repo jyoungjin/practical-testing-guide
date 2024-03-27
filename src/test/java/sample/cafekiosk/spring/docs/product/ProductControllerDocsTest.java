@@ -2,7 +2,6 @@ package sample.cafekiosk.spring.docs.product;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import sample.cafekiosk.spring.api.controller.product.ProductController;
@@ -17,6 +16,7 @@ import sample.cafekiosk.spring.domain.product.ProductType;
 import static org.mockito.BDDMockito.*;
 import static org.mockito.Mockito.mock;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -59,10 +59,13 @@ public class ProductControllerDocsTest extends RestDocsSupport {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("product-create",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
                         requestFields(
                                 fieldWithPath("type").type(JsonFieldType.STRING)
                                         .description("상품 타입"),
                                 fieldWithPath("sellingStatus").type(JsonFieldType.STRING)
+                                        .optional()
                                         .description("상품 판매상태"),
                                 fieldWithPath("name").type(JsonFieldType.STRING)
                                         .description("상품 이름"),
