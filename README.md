@@ -156,3 +156,36 @@
 
 ### Section 7. 더 나은 테스트를 작성하기 위한 구체적 조언
 - **Keyword**
+  - `테스트 하나 당 목적은 하나`
+  - `완벽한 제어`
+  - `테스트 환경의 독립성, 테스트 간 독립성`
+  - `Test Fixture`
+  - `deleteAll(), deleteAllInBatch()`
+  - `@ParameterizedTest, @DynamicTest`
+  - `수행 환경 통합하기`
+  - `private method test`
+  - `테스트에서만 필요한 코드`
+- 한 문단에 한 주제 : 테스트 코드에는 분기문, 반복문과 같은 로직이 들어가지 않는 것이 좋다. -> @ParameterizedTest 활용
+- 완벽하게 제어하기 : 제어할 수 없는 값(외부 시스템, 현재 시간)들은 상위 Layer로 이전해서 테스트 코드가 용이하게 한다.
+- 테스트 환경의 독립성을 보장하자!
+- 테스트 간 독립성을 보장하자! : 테스트 간 공유 자원을 사용하는 것을 지양하자. -> @DynamicTest
+- Test Fixture (given 절에서 사용하는 고정 값들을 칭함)
+  - Fixture : 고정물, 고정되어 있는 물체
+  - 테스트를 위해 원하는 상태로 고정시킨 일련의 객체
+- Test Fixture 클렌징
+  - deleteAll() vs deleteAllInBatch() : deleteAllInBatch()를 권장! deleteAll()의 경우 내부 로직에 의해 성능 저하
+- @ParameterizedTest
+  - 값을 변경하여 테스트를 하고 싶은 경우
+  - [Junit5 Parameterized Tests](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests)
+    - @ValueSource, @MethodSource, @CsvSource ...
+  - [ProductTypeTest.java](src%2Ftest%2Fjava%2Fsample%2Fcafekiosk%2Fspring%2Fdomain%2Fproduct%2FProductTypeTest.java)
+- @DynamicTest
+  - 공유 자원을 사용하며 여러 테스트를 시나리오대로 검증하고 싶은 경우
+  - [StockTest.java](src%2Ftest%2Fjava%2Fsample%2Fcafekiosk%2Fspring%2Fdomain%2Fstock%2FStockTest.java)
+- 테스트 수행도 비용이다. 환경 통합하기
+  - [ControllerTestSupport.java](src%2Ftest%2Fjava%2Fsample%2Fcafekiosk%2Fspring%2FControllerTestSupport.java)
+  - [IntegrationTestSupport.java](src%2Ftest%2Fjava%2Fsample%2Fcafekiosk%2Fspring%2FIntegrationTestSupport.java)
+- private 메서드의 테스트는 어떻게 하나요?
+  - 하지말것! -> 객체를 분리할 시점인가?에 대한 고민을 해보자!
+  - [ProductNumberFactory.java](src%2Fmain%2Fjava%2Fsample%2Fcafekiosk%2Fspring%2Fapi%2Fservice%2Fproduct%2FProductNumberFactory.java)
+- 테스트에서만 필요한 메서드가 생겼는데 프로덕션 코드에서는 필요 없다면? -> 만들어도 된다. 하지만 **보수적**으로 접근하자.

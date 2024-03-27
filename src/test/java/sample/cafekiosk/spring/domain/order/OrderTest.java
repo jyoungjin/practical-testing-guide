@@ -3,8 +3,7 @@ package sample.cafekiosk.spring.domain.order;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import sample.cafekiosk.spring.IntegrationTestSupport;
 import sample.cafekiosk.spring.domain.product.Product;
 
 import java.time.LocalDateTime;
@@ -14,9 +13,7 @@ import static sample.cafekiosk.spring.domain.order.OrderStatus.*;
 import static sample.cafekiosk.spring.domain.product.ProductSellingStatus.SELLING;
 import static sample.cafekiosk.spring.domain.product.ProductType.*;
 
-@SpringBootTest
-@ActiveProfiles("test")
-class OrderTest {
+class OrderTest extends IntegrationTestSupport {
 
     @DisplayName("주문 생성 시 상품 리스트에서 주문의 총 금액을 계산한다.")
     @Test

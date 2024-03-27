@@ -20,7 +20,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class MailServiceTest {
 
-//    @Mock
     @Mock
     private MailSendClient mailSendClient;
 

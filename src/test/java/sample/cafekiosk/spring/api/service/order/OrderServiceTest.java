@@ -4,8 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import sample.cafekiosk.spring.IntegrationTestSupport;
 import sample.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import sample.cafekiosk.spring.api.service.order.response.OrderResponse;
 import sample.cafekiosk.spring.domain.order.OrderRepository;
@@ -23,10 +22,7 @@ import static org.assertj.core.api.Assertions.*;
 import static sample.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 import static sample.cafekiosk.spring.domain.product.ProductType.*;
 
-@ActiveProfiles("test")
-//@Transactional
-@SpringBootTest
-class OrderServiceTest {
+class OrderServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private OrderService orderService;
@@ -45,9 +41,16 @@ class OrderServiceTest {
 
     @AfterEach
     void tearDown() {
+        // deleteAllInBatch() vs deleteAll()
+        // deleteAllInBatch() : fk 를 맺고 있는 경우 에러가 발생한다.
         orderProductRepository.deleteAllInBatch();
         productRepository.deleteAllInBatch();
         orderRepository.deleteAllInBatch();
+
+        // deleteAll() : fk 를 맺고 있는 데이터를 건건이 select 한 뒤, 삭제한다.
+//        orderRepository.deleteAll();
+//        productRepository.deleteAll();
+
         stockRepository.deleteAllInBatch();
     }
 
@@ -158,7 +161,8 @@ class OrderServiceTest {
                 .containsExactlyInAnyOrder(
                         tuple("001", 0),
                         tuple("002", 1)
-                );;
+                );
+        ;
     }
 
     @DisplayName("재고가 부족한 상품으로 주문을 생성하려는 경우 예외가 발생한다.")
